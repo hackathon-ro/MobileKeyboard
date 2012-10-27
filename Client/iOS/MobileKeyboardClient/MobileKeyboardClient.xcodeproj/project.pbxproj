@@ -309,6 +309,7 @@
 				C10F2894163C449D00C8176D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

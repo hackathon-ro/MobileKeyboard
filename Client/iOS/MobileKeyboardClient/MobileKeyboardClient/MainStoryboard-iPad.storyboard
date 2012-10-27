@@ -19,6 +19,15 @@
             <point key="canvasLocation" x="7" y="-284"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="InitialViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="keyboardKeyPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="keyboardSpecialKeyPressed:" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -11,5 +11,7 @@
 @interface InitialViewController : UIViewController
 
 -(IBAction)keyboardKeyPressed:(UIButton *)sender;
+-(IBAction)keyboardSpecialKeyPressed:(UIButton *)sender;
+
 
 @end

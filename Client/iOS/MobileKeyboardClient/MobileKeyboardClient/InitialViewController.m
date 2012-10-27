@@ -21,15 +21,25 @@
 {
     [super viewDidLoad];
     
+    //set the server details
     self.connectionManager = [[ConnectionManager alloc] init];
     self.connectionManager.serverURL = @"192.168.1.103";
-    self.connectionManager.portNumber = 11000;
+    self.connectionManager.portNumber = 500;
+    
+    //connect to the server
     [self.connectionManager connectToServer];
 }
 
+//method called when a "normal" key is pressed (like "A", "B", "<", etc.)
 -(IBAction)keyboardKeyPressed:(UIButton *)sender
 {
     [self.connectionManager sendsMessageToServer:sender.titleLabel.text];
+}
+
+//method called when a "special" key is pressed (like "CTRL", "ALT", "Enter", etc.)
+-(IBAction)keyboardSpecialKeyPressed:(UIButton *)sender
+{
+    [self.connectionManager sendsSpecialMessageToServer:sender.titleLabel.text];
 }
 
 -(NSUInteger)supportedInterfaceOrientations

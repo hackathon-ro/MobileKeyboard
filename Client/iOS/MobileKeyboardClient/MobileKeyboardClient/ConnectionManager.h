@@ -14,6 +14,7 @@
 
 -(void)connectToServer;
 -(BOOL)sendsMessageToServer:(NSString *)message;
+-(BOOL)sendsSpecialMessageToServer:(NSString *)message;
 
 @property int portNumber;
 @property (strong, nonatomic) NSString *serverURL;
