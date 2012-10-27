@@ -1,0 +1,9 @@
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\bin\Debug\Server.exe
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\bin\Debug\Server.pdb
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.Form1.resources
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.Properties.Resources.resources
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.exe
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.pdb
