@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Net;
+using WindowsInput;
 
 
 namespace Server
@@ -16,7 +17,6 @@ namespace Server
 
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -42,8 +42,6 @@ namespace Server
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            //Cursor.Position = new Point(Cursor.Position.X + 100, Cursor.Position.Y + 100);
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)

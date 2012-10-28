@@ -20,6 +20,7 @@ namespace Server
             //generating random port number > 1000
             Random number = new Random();
             port = number.Next(100) * 100 + number.Next(100);
+            if (port < 1000) port = port * 10;
         }
 
         public static int GetPort()
