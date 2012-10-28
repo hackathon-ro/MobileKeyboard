@@ -7,3 +7,6 @@ C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debu
 C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.exe
 C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\obj\x86\Debug\Server.pdb
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\bin\Debug\InputSimulator.dll
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\bin\Debug\InputSimulator.pdb
+C:\Users\Maio-DELL\Documents\GitHub\Hackathon-Project\Server\Server\bin\Debug\InputSimulator.xml
