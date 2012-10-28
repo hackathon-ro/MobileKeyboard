@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WindowsInput;
+using System.Threading;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace Server
 {
@@ -12,6 +15,9 @@ namespace Server
         public ContentManager()
         {
         }
+
+        private static int xMouseMove;
+        private static int yMouseMove;
 
         public static void ShowSymbol(char key)
         {
@@ -247,6 +253,18 @@ namespace Server
                 case 'Q': InputSimulator.SimulateKeyPress(VirtualKeyCode.F12);
                     break;
             }                                
+        }
+
+        public static void MouseCommand(int x, int y)
+        {
+            if (x > 0) xMouseMove = 1;
+            if (x < 0) xMouseMove = -1;
+            if (x == 0) xMouseMove = 0;
+            if (y > 0) yMouseMove = 1;
+            if (y < 0) yMouseMove = -1;
+            if (y == 0) yMouseMove = 0;
+            Cursor.Position = new Point(Cursor.Position.X + xMouseMove, Cursor.Position.Y + yMouseMove);
+            Thread.Sleep(5);
         }
 
     }

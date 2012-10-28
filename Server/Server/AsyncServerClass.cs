@@ -10,11 +10,21 @@ namespace Server
 {
     class AsyncServerClass
     {
-        //???
         public static ManualResetEvent allDone = new ManualResetEvent(false);
 
+        private static int port;
+        
+
         public AsyncServerClass()
-        {            
+        {
+            //generating random port number > 1000
+            Random number = new Random();
+            port = number.Next(100) * 100 + number.Next(100);
+        }
+
+        public static int GetPort()
+        {
+            return port;
         }
 
         public void Start()
@@ -27,10 +37,10 @@ namespace Server
         {
             byte[] bytes = new Byte[1024];
 
-            Console.WriteLine("Server started!");
+            Console.WriteLine("Server is up and running!");
 
             //Creating local endpoint for listening, on any address.
-            IPEndPoint localeEndPoint = new IPEndPoint(IPAddress.Any, 500);
+            IPEndPoint localeEndPoint = new IPEndPoint(IPAddress.Any, port);
 
             //Creating the socket
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -43,20 +53,16 @@ namespace Server
 
                 while (true)
                 {
-                    //?
                     allDone.Reset();
 
                     listener.BeginAccept(new AsyncCallback(AcceptCallback), listener);
-                    //?
+                    
                     allDone.WaitOne();
                 }
             }
             catch (Exception e) {
                 Console.WriteLine(e.ToString());
             }
-
-            //...not here
-            //...not here
         }
 
         public static void AcceptCallback(IAsyncResult ar) 
@@ -75,7 +81,7 @@ namespace Server
         }
 
         public static void ReadCallback(IAsyncResult ar) {
-            Console.WriteLine("ReadCallBack STARTED!");
+            //Decoding data received from socket to make the proper input.
             String content = String.Empty;
 
             StateObject state = (StateObject)ar.AsyncState;
@@ -84,20 +90,31 @@ namespace Server
             int bytesRead = handler.EndReceive(ar);
             state.sb.Clear();
             state.sb.Append(Encoding.ASCII.GetString(state.buffer, 0, bytesRead));
-            Console.WriteLine(bytesRead);
-
+            //Console.WriteLine(bytesRead);
             if (bytesRead > 0)
             {
-                byte x = 2;
+                //Code used in order to manage exceptional keys and mouse movements;
+                //The bite is a prefix in the received message.
+                //No prefix = normal key press.
+                byte special = 2;
+                byte mouse = 3;
                 content = state.sb.ToString();
                 for (int i = 0; i < content.Length; i++)
                 {
-                    if (x == Convert.ToByte(content[i]))
+                    if (special == Convert.ToByte(content[i]))
                     {
                         //Special Key Found (Shift/Ctrl/Alt etc.)
-                        Console.WriteLine("Special Key Found!");
                         i++;
                         ContentManager.ShowSpecialKey(content[i]);
+                    }
+                    else if (mouse == Convert.ToByte(content[i]))
+                    {
+                        //Interpreting all the contet received on socket
+                        for (int j = 0; j < content.Length / 9; j++)
+                            ContentManager.MouseCommand(GetXFromContent(content.Substring(j * 9 + 1,4)),
+                                GetYFromContent(content.Substring(j * 9 + 5,4)));
+                        //Jumping over the mouse command to the next input
+                        i = i + content.Length;
                     }
                     else
                     {
@@ -105,24 +122,15 @@ namespace Server
                         ContentManager.ShowSymbol(content[i]);
                     }
                 }
+                //Reading the next input
                 handler.BeginReceive(state.buffer, 0, StateObject.bufferSize, 0, new AsyncCallback(ReadCallback), state);
             }
             else 
             {
+                //No byte read => socket error => closing
                 handler.Close();
             }
             
-        }
-
-        private static void Send(Socket handler, string data)
-        {
-            byte[] byteData = Encoding.ASCII.GetBytes(data);
-            handler.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), handler);
-        }
-
-        private static void SendCallback(IAsyncResult ar) 
-        { 
-        
         }
 
         //Object for reading client data.
@@ -132,7 +140,32 @@ namespace Server
             public byte[] buffer = new byte[bufferSize];
             public StringBuilder sb = new StringBuilder();
         }
-        
-        
+
+        //Converting mouse coordinates from string to int
+        public static int GetXFromContent(String content)
+        {
+            if (content.IndexOf('-') == -1)
+            {
+                return Convert.ToInt32(content);
+            }
+            else
+            {
+                content = content.Replace('-', '0');
+                return Convert.ToInt32(content) * (-1);
+            }
+        }
+
+        public static int GetYFromContent(String content)
+        {
+            if (content.IndexOf('-') == -1)
+            {
+                return Convert.ToInt32(content);
+            }
+            else
+            {
+                content = content.Replace('-', '0');
+                return Convert.ToInt32(content) * (-1);
+            }
+        }
     }
 }
